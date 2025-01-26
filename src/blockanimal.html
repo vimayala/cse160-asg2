@@ -1,0 +1,100 @@
+<!-- 
+Victoria Ayala
+vimayala@ucsc.edu
+
+Note to Graders:
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <link rel="stylesheet" href="asg1.css"> -->
+    <meta charset="utf-8" />
+    <title>CSE 160 Asg 2</title>
+  </head>
+
+  <body onload="main()">
+    <canvas id="webgl" width="445" height="400">
+      Please use a browser that supports "canvas"
+    </canvas>
+
+    <h2>
+    <button type="button" id="clear">Clear Canvas</button>
+
+    <h2>
+      Canvas Color:
+    </h2>
+  </h2>
+    <button type="button" id="whiteCanvas">white</button>
+    <button type="button" id="creamCanvas"> cream</button>
+    <button type="button" id="blackCanvas">black</button>
+
+    <h2>
+      Shape Selections:
+    </h2>
+    <button type="button" id="pointButton">square
+    </button>
+    <button type="button" id="triButton">triangle
+    </button>
+    <button type="button" id="circleButton">circle
+    </button>
+
+    <p id = "numdot">XXX</p>
+
+    <div class="container">
+      <div class="sliders">
+        <h2>Color Adjustment:</h2>
+        <div class="slider-row">
+          <label for="redSlider">Red</label>
+          <input type="range" min="0" max="100" value="100" class="slider" id="redSlider">
+        </div>
+        <div class="slider-row">
+          <label for="greenSlider">Green</label>
+          <input type="range" min="0" max="100" value="100" class="slider" id="greenSlider">
+        </div>
+        <div class="slider-row">
+          <label for="blueSlider">Blue</label>
+          <input type="range" min="0" max="100" value="100" class="slider" id="blueSlider">
+        </div>
+        <div class="slider-row">
+          <label for="alphaSlider">Opacity</label>
+          <input type="range" min="0" max="100" value="100" class="slider" id="alphaSlider">
+        </div>
+      </div>
+      <div id="colorPreview"></div>
+    </div>
+    
+
+    <h2>
+      Size and Circle Options:
+    </h2>
+    <div class="sliders">
+      <div class="slider-row">
+        <label for="sizeSlider">Size</label>
+        <input type="range" min="5" max="40" value="100" class="slider" id="sizeSlider">
+      </div>
+      <div class="slider-row">
+        <label for="segSlider">(Circles) Segment Count</label>
+        <input type="range" min="5" max="40" value="100" class="slider" id="segSlider">
+      </div>
+    </div>
+
+    <h2>
+      Let Them Eat Cake:
+    </h2>
+    <button type="button" id="cakeToggle">🍰</button>
+
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="../lib/cuon-matrix-cse160.js"></script>
+    <script src="../lib/shape-classes/Point.js"></script>
+    <script src="../lib/shape-classes/Triangle.js"></script>
+    <script src="../lib/shape-classes/Circle.js"></script>
+    <script src="../lib/shape-classes/Cube.js"></script>
+
+    <script src="blockyanimal.js"></script>
+    
+  </body>
+</html>
