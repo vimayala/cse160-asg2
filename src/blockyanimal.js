@@ -67,6 +67,8 @@ function main() {
 var g_startTime = performance.now() / 1000.0 ;
 var g_seconds = performance.now() / 1000.0 - g_startTime;
 var g_yellowAnimation = true;
+var g_magentaAnimation = false;
+
 
 function tick(){
     g_seconds = performance.now() / 1000.0 - g_startTime;
@@ -210,6 +212,9 @@ function addActionForHTMLUI(){
     document.getElementById('animateYellowButtonON').onclick = function () {g_yellowAnimation = true};
     document.getElementById('animateYellowButtonOFF').onclick = function () {g_yellowAnimation = false};
 
+    document.getElementById('animateMagentaButtonON').onclick = function () {g_magentaAnimation = true};
+    document.getElementById('animateMagentaButtonOFF').onclick = function () {g_magentaAnimation = false};
+
 
     // Color Slider Events
     // const colorPreview = document.getElementById('colorPreview');
@@ -253,6 +258,10 @@ function updateAnimationAngles(){
         g_yellowAngle = 45 * Math.sin(g_seconds)
 
     }
+    if(g_magentaAnimation){
+        g_MagentaAngle = 45 * Math.sin(2.5*g_seconds)
+
+    }
     // else{
     //     yellow.matrix.rotate(g_yellowAngle, 0, 0, 1);
     // }
@@ -287,15 +296,14 @@ function renderAllShapes(){
     yellow.render();
 
 
-    var testBox = new Cube();
-    testBox.color = [1.0, 0.0, 1.0, 1.0];
-    testBox.matrix = yellowCoordinatesMatrix;
-    testBox.matrix.translate(0, 0.65, 0.0, 0);
-    testBox.matrix.rotate(g_MagentaAngle, 0, 0, 1);
-    testBox.matrix.scale(0.3, 0.3, 0.3);
-    testBox.matrix.translate(-0.5, 0, -0.001, 0);
-
-    testBox.render();
+    var magenta = new Cube();
+    magenta.color = [1.0, 0.0, 1.0, 1.0];
+    magenta.matrix = yellowCoordinatesMatrix;
+    magenta.matrix.translate(0, 0.65, 0.0, 0);
+    magenta.matrix.rotate(g_MagentaAngle, 0, 0, 1);
+    magenta.matrix.scale(0.3, 0.3, 0.3);
+    magenta.matrix.translate(-0.5, 0, -0.001, 0);
+    magenta.render();
 
     var duration = performance.now() - startTime;
     sendTextToHTML(" ms: " + Math.floor(duration) + " fps: " + Math.floor(10000/duration) / 10, "numdot");
