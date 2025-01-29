@@ -58,8 +58,21 @@ Note to Graders:
           <input type="range" min="0" max="100" value="100" class="slider" id="blueSlider">
         </div>
         <div class="slider-row">
-          <label for="alphaSlider">Opacity</label>
-          <input type="range" min="0" max="100" value="100" class="slider" id="alphaSlider">
+          <label for="magentaSlider">Magenta</label>
+          <input type="range" min="-45" max="45" value="0" class="slider" id="magentaSlider">
+        </div>
+        <div class="slider-row">
+          <label for="yellowSlider">Yellow</label>
+          <input type="range" min="-45" max="45" value="0" class="slider" id="yellowSlider">
+          Animation:
+          <button type="button" id="animateYellowButtonON">ON
+          <button type="button" id="animateYellowButtonOFF">OFF
+
+
+        </div>
+        <div class="slider-row">
+          <label for="angleSlider">Camera Angle</label>
+          <input type="range" min="0" max="90" value="5" class="slider" id="angleSlider">
         </div>
       </div>
       <div id="colorPreview"></div>
@@ -94,7 +107,7 @@ Note to Graders:
     <script src="../lib/shape-classes/Circle.js"></script>
     <script src="../lib/shape-classes/Cube.js"></script>
 
-    <script src="blockyanimal.js"></script>
+    <script src="BlockyAnimal.js"></script>
     
   </body>
 </html>
