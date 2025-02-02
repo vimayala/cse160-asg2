@@ -4,8 +4,10 @@ vimayala@ucsc.edu
 
 Note to Graders:
   Credited ChatGPT where used (for mouse control of the camera). 
-  Known issue: if sliders are used then mouse, dog jumps out of frame unless sliders hovered over again.
+  Known issue: if sliders are used then mouse, dog jumps out of frame unless sliders hovered over/used again.
   Also aware of not very natural animation :P I just wanted to make a pug.
+
+  View at: https://vimayala.github.io/cse160-asg2/src/BlockyAnimal.html
 -->
 
 <!DOCTYPE html>
@@ -18,11 +20,8 @@ Note to Graders:
 
   <body onload="main()">
     <canvas id="webgl" width="500" height="500">
-      Please use a browser that supports "canvas"
+      Please use a browser that supports the "canvas" feature
     </canvas>
-
-    <h3>
-    <!-- <button type="button" id="clear">Clear Canvas</button> -->
 
     <h3>
       Canvas Color:
@@ -34,61 +33,50 @@ Note to Graders:
 
     <p id = "numdot">XXX</p>
 
-    <!-- <div class="container"> -->
-      <div class="sliders">
-        <h2>Animation Controls:</h2>
-        <div class="slider-row">
-          <label for="dogWalkingButton">Dog Body Walking Animation:</label>
-          
-          <button type="button" id="animateDogWalkingButtonON">ON
-          <button type="button" id="animateDogWalkingButtonOFF">OFF
-        </div>  
+    <div class="sliders">
+      <h2>Animation Controls:</h2>
+      <div class="slider-row">
+        <label for="dogWalkingButton">Dog Body Walking Animation:</label>
+        
+        <button type="button" id="animateDogWalkingButtonON">ON
+        <button type="button" id="animateDogWalkingButtonOFF">OFF
+      </div>  
 
 
-        <div class="slider-row">
-          <label for="dogLegSlider">Dog Leg Walking Control</label>
-          <input type="range" min="-10" max="10" value="0" class="slider" id="dogLegSlider">
-          Animation:
-          <button type="button" id="animateLegButtonON">ON
-          <button type="button" id="animateLegButtonOFF">OFF
-        </div>
-
-        <div class="slider-row">
-          <label for="feetSlider">Dog Foot Joint Control</label>
-          <input type="range" min="-45" max="45" value="0" class="slider" id="feetSlider">
-          Animation:
-          <button type="button" id="animateFeetButtonON">ON
-          <button type="button" id="animateFeetButtonOFF">OFF
-        </div>
-
-        <!-- <div class="slider-row"> -->
-          <label for="angleXSlider">Camera Angle X</label>
-          <input type="range" min="0" max="90" value="0" class="slider" id="angleXSlider">
-        <!-- </div> -->
-
-        <!-- <div class="slider-row"> -->
-          <label for="angleYSlider">Camera Angle Y</label>
-          <input type="range" min="0" max="90" value="15" class="slider" id="angleYSlider">
-        <!-- </div> -->
-
-        <!-- <div class="slider-row"> -->
-          <label for="angleZSlider">Camera Angle Z</label>
-          <input type="range" min="0" max="90" value="0" class="slider" id="angleZSlider">
-        <!-- </div> -->
-
+      <div class="slider-row">
+        <label for="dogLegSlider">Dog Leg Walking Control</label>
+        <input type="range" min="-10" max="10" value="0" class="slider" id="dogLegSlider">
+        Animation:
+        <button type="button" id="animateLegButtonON">ON
+        <button type="button" id="animateLegButtonOFF">OFF
       </div>
-    <!-- </div> -->
+
+      <div class="slider-row">
+        <label for="feetSlider">Dog Foot Joint Control</label>
+        <input type="range" min="-45" max="45" value="0" class="slider" id="feetSlider">
+        Animation:
+        <button type="button" id="animateFeetButtonON">ON
+        <button type="button" id="animateFeetButtonOFF">OFF
+      </div>
+
+      <label for="angleXSlider">Camera Angle X</label>
+      <input type="range" min="0" max="90" value="0" class="slider" id="angleXSlider">
+
+      <label for="angleYSlider">Camera Angle Y</label>
+      <input type="range" min="0" max="90" value="15" class="slider" id="angleYSlider">
+
+      <label for="angleZSlider">Camera Angle Z</label>
+      <input type="range" min="0" max="90" value="0" class="slider" id="angleZSlider">
+
+    </div>
     
     <script src="../lib/webgl-utils.js"></script>
     <script src="../lib/webgl-debug.js"></script>
     <script src="../lib/cuon-utils.js"></script>
     <script src="../lib/cuon-matrix-cse160.js"></script>
-    <script src="../lib/shape-classes/Point.js"></script>
     <script src="../lib/shape-classes/Triangle.js"></script>
-    <script src="../lib/shape-classes/Circle.js"></script>
     <script src="../lib/shape-classes/Cube.js"></script>
     <script src="../lib/shape-classes/Pyramid.js"></script>
-
     <script src="BlockyAnimal.js"></script>
     
   </body>

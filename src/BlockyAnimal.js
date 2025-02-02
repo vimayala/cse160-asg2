@@ -22,16 +22,16 @@ var FSHADER_SOURCE =
 
 
 // Constants
-const POINT = 0;
-const TRIANGLE = 1;
-const CIRCLE = 2;
+// const POINT = 0;
+// const TRIANGLE = 1;
+// const CIRCLE = 2;
 
 // Defining global variables
 let canvas;
 let gl;
 let a_Position;
 let u_FragColor;
-let u_Size;
+// let u_Size;
 
 // Global variables for HTML action
 let g_clearColorR = 0.0;
@@ -39,7 +39,7 @@ let g_clearColorG = 0.0;
 let g_clearColorB = 0.0;
 let g_selectedColor = [1.0, 1.0, 1.0, 1.0]
 let g_selectedSize = 5;
-let g_selectedType = POINT;
+// let g_selectedType = POINT;
 let g_selectedSegments = 12;
 
 let g_globalAngleX = 0;
@@ -86,7 +86,7 @@ let g_lastY = null;
 let g_sensitivity = 0.5; // Adjust for smoother/faster rotation
 let g_isDragging = false; 
 
-// Asked ChatGPT for this
+// Asked ChatGPT for this - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 function handleMouseMove(event) {
     if (!g_isDragging) return; // Only rotate if mouse is held down
 
@@ -107,9 +107,10 @@ function handleMouseMove(event) {
 
     renderScene();
 }
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 function tick(){
-    g_seconds = performance.now() / 1000.0 - g_startTime;
+    g_seconds = (performance.now() / 1000.0 - g_startTime) * 1.5;
     updateAnimationAngles();
     renderScene();   
     requestAnimationFrame(tick);
@@ -176,11 +177,6 @@ function connectVariablesToGLSL(){
 }
 
 function addActionForHTMLUI(){
-    // Canvas Color + Clear Button Events
-    // document.getElementById('clear').onclick = function () { 
-    //     g_shapesList = []; 
-    //     renderScene(); 
-    // };
     document.getElementById('whiteCanvas').onclick = function () { 
         g_clearColorR = 1.0;
         g_clearColorG = 1.0
@@ -243,18 +239,6 @@ function addActionForHTMLUI(){
         renderScene(); 
     });
 }
- 
-
-function convertCoordinatesToGL(ev){
-    var x = ev.clientX; // x coordinate of a mouse pointer
-    var y = ev.clientY; // y coordinate of a mouse pointer
-    var rect = ev.target.getBoundingClientRect();
-  
-    x = ((x - rect.left) - canvas.width/2)/(canvas.width/2);
-    y = (canvas.height/2 - (y - rect.top))/(canvas.height/2);
-
-    return([x,y, x,y, x,y]);
-}
 
 function updateAnimationAngles(){
     if(g_yellowAnimation){
@@ -268,7 +252,6 @@ function updateAnimationAngles(){
     if(g_walkingAnimation){
         g_walkingAngle = 7 * Math.sin((3 * g_seconds));
         g_BodyAngle = 45 * Math.sin(2.5 * g_seconds);
-        // g_LegAngle = 7 * Math.sin((3 * g_seconds));
     }
 
     if(g_legAnimation){
@@ -279,11 +262,11 @@ function updateAnimationAngles(){
 function renderScene(){
     var startTime = performance.now();
 
-    // var globalRotMat = new Matrix4().rotate(g_globalAngleX, g_globalAngleY, 1, 0);
+    // Rotate different axis
     let globalRotMat = new Matrix4()
-    .rotate(g_globalAngleX, 1, 0, 0)  // X-axis
-    .rotate(g_globalAngleY, 0, 1, 0)  // Y-axis
-    .rotate(g_globalAngleZ, 0, 0, 1); // Z-axis
+    .rotate(g_globalAngleX, 1, 0, 0) 
+    .rotate(g_globalAngleY, 0, 1, 0) 
+    .rotate(g_globalAngleZ, 0, 0, 1);
 
 
     gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotMat.elements);
@@ -332,7 +315,6 @@ function renderScene(){
     rightEye.color = [0.1, 0.1, 0.1, 1.0];
     rightEye.matrix = dogHeadCoordsMatrix2;
     rightEye.matrix.translate(3, 0, -0.1);
-    // rightEye.matrix.scale(0.1, 0.1, 0.1);
     rightEye.render();
 
    // Dog's Ears
