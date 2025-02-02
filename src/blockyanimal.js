@@ -177,10 +177,10 @@ function connectVariablesToGLSL(){
 
 function addActionForHTMLUI(){
     // Canvas Color + Clear Button Events
-    document.getElementById('clear').onclick = function () { 
-        g_shapesList = []; 
-        renderScene(); 
-    };
+    // document.getElementById('clear').onclick = function () { 
+    //     g_shapesList = []; 
+    //     renderScene(); 
+    // };
     document.getElementById('whiteCanvas').onclick = function () { 
         g_clearColorR = 1.0;
         g_clearColorG = 1.0

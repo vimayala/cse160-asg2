@@ -1,10 +1,11 @@
 body, h1, h2, h3, p, ul, ol {
+    font-size: 16px;
     margin: 0;
-    padding: 0;
+    /* padding: 0; */
 }
 
 canvas {
-    margin-top: 20px;
+    /* margin-top: 20px; */
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -14,14 +15,14 @@ body {
     font-family: Segoe UI, sans-serif;
     background-color: #f9f9f9;
     color: #57595f;
-    line-height: 1.5;
+    /* line-height: 1.5; */
     padding: 25px;
 }
 
 button {
     background: #a3b4d8;
     color: #fff;
-    padding: 10px 10px;
+    padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -114,73 +115,3 @@ button img {
     margin-left: 15px; /* Add space to the left of the preview */
     flex-shrink: 0;
 }
-
-/* Keep sliders at same distance */
-#redSlider{
-    margin-left: 26px;
-    max-width: 400px;
-    width: 325px; 
-
-}
-#greenSlider{
-    margin-left: 11px;
-    width: 325px; 
-
-}
-#blueSlider{
-    margin-left: 24px;
-    width: 325px; 
-
-}
-#alphaSlider {
-    width: 325px; 
-}
-#sizeSlider{
-    max-width: 400px;
-}
-#segSlider {
-    max-width: 257px;
-}
-
-/* Change slider button color per color */
-#redSlider.slider::-moz-range-thumb {
-    background: #ff0000;
-}
-#redSlider.slider::-ms-thumb {
-    background: #ff0000;
-}
-#redSlider.slider::-webkit-slider-thumb {
-    background: #ff0000;
-}
-
-#greenSlider.slider::-moz-range-thumb {
-    background: #00ff55;
-}
-#greenSlider.slider::-ms-thumb {
-    background: #00ff55;
-}
-#greenSlider.slider::-webkit-slider-thumb {
-    background: #00ff55;
-}
-  
-#blueSlider.slider::-moz-range-thumb {
-    background: #1783ff;
-}
-#blueSlider.slider::-ms-thumb {
-    background: #1783ff;
-}
-#blueSlider.slider::-webkit-slider-thumb {
-    background: #1783ff;
-}
-
-
-/* From help of ChatGPT */
-#hiddenImage {
-    display: none; /* Start with the image hidden */
-    max-width: 100%;
-    margin-top: 10px; /* Add some spacing from the button */
-  }
-
-  #imgToggle {
-    margin-top: 10px;
-  }

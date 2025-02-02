@@ -21,40 +21,32 @@ Note to Graders:
       Please use a browser that supports "canvas"
     </canvas>
 
-    <h2>
-    <button type="button" id="clear">Clear Canvas</button>
+    <h3>
+    <!-- <button type="button" id="clear">Clear Canvas</button> -->
 
-    <h2>
+    <h3>
       Canvas Color:
     </h2>
-  </h2>
+  </h3>
     <button type="button" id="whiteCanvas">white</button>
     <button type="button" id="creamCanvas"> cream</button>
     <button type="button" id="blackCanvas">black</button>
 
     <p id = "numdot">XXX</p>
 
-    <div class="container">
+    <!-- <div class="container"> -->
       <div class="sliders">
         <h2>Animation Controls:</h2>
         <div class="slider-row">
-          <label for="dogWalkingButton">Dog Walking</label>
-          <!-- <input type="range" min="-45" max="45" value="0" class="slider" id="dogHeadSlider"> -->
-          Animation:
+          <label for="dogWalkingButton">Dog Body Walking Animation:</label>
+          
           <button type="button" id="animateDogWalkingButtonON">ON
           <button type="button" id="animateDogWalkingButtonOFF">OFF
         </div>  
 
-        <div class="slider-row">
-          <label for="feetSlider">Feet Joint Control</label>
-          <input type="range" min="-45" max="45" value="0" class="slider" id="feetSlider">
-          Animation:
-          <button type="button" id="animateFeetButtonON">ON
-          <button type="button" id="animateFeetButtonOFF">OFF
-        </div>
 
         <div class="slider-row">
-          <label for="dogLegSlider">Leg Joint Control</label>
+          <label for="dogLegSlider">Dog Leg Walking Control</label>
           <input type="range" min="-10" max="10" value="0" class="slider" id="dogLegSlider">
           Animation:
           <button type="button" id="animateLegButtonON">ON
@@ -62,22 +54,30 @@ Note to Graders:
         </div>
 
         <div class="slider-row">
+          <label for="feetSlider">Dog Foot Joint Control</label>
+          <input type="range" min="-45" max="45" value="0" class="slider" id="feetSlider">
+          Animation:
+          <button type="button" id="animateFeetButtonON">ON
+          <button type="button" id="animateFeetButtonOFF">OFF
+        </div>
+
+        <!-- <div class="slider-row"> -->
           <label for="angleXSlider">Camera Angle X</label>
           <input type="range" min="0" max="90" value="0" class="slider" id="angleXSlider">
-        </div>
+        <!-- </div> -->
 
-        <div class="slider-row">
+        <!-- <div class="slider-row"> -->
           <label for="angleYSlider">Camera Angle Y</label>
           <input type="range" min="0" max="90" value="15" class="slider" id="angleYSlider">
-        </div>
+        <!-- </div> -->
 
-        <div class="slider-row">
+        <!-- <div class="slider-row"> -->
           <label for="angleZSlider">Camera Angle Z</label>
           <input type="range" min="0" max="90" value="0" class="slider" id="angleZSlider">
-        </div>
+        <!-- </div> -->
 
       </div>
-    </div>
+    <!-- </div> -->
     
     <script src="../lib/webgl-utils.js"></script>
     <script src="../lib/webgl-debug.js"></script>
