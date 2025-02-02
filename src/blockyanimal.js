@@ -42,7 +42,11 @@ let g_selectedSize = 5;
 let g_selectedType = POINT;
 let g_selectedSegments = 12;
 
-let g_globalAngle = 0;
+let g_globalAngleX = 30;
+let g_globalAngleY = 0;
+let g_globalAngleZ = 0;
+
+
 let g_yellowAngle = 0;
 let g_MagentaAngle = 0;
 
@@ -59,6 +63,11 @@ function main() {
     // canvas.onmousedown = handleClicks;
     // canvas.onmousemove = function(ev) { if(ev.buttons === 1){ handleClicks(ev); } };
 
+    canvas.addEventListener("mousedown", () => g_isDragging = true);
+    canvas.addEventListener("mouseup", () => g_isDragging = false);
+    canvas.addEventListener("mouseleave", () => g_isDragging = false);
+    canvas.addEventListener("mousemove", handleMouseMove);
+
     clearCanvas();
     // updateColorPreview();
     renderAllShapes()
@@ -69,6 +78,33 @@ var g_seconds = performance.now() / 1000.0 - g_startTime;
 var g_yellowAnimation = true;
 var g_magentaAnimation = false;
 
+let g_lastX = null;
+let g_lastY = null;
+let g_sensitivity = 0.5; // Adjust for smoother/faster rotation
+let g_isDragging = false; 
+
+
+// Asked ChatGPT for this
+function handleMouseMove(event) {
+    if (!g_isDragging) return; // Only rotate if mouse is held down
+
+    if (g_lastX === null || g_lastY === null) {
+        g_lastX = event.clientX;
+        g_lastY = event.clientY;
+        return;
+    }
+
+    let deltaX = event.clientX - g_lastX;
+    let deltaY = event.clientY - g_lastY;
+
+    g_globalAngleY += deltaX * g_sensitivity; // Rotate around Y-axis (left-right)
+    g_globalAngleZ += deltaY * g_sensitivity; // Rotate around Z-axis (up-down)
+
+    g_lastX = event.clientX;
+    g_lastY = event.clientY;
+
+    renderAllShapes();
+}
 
 function tick(){
     g_seconds = performance.now() / 1000.0 - g_startTime;
@@ -222,7 +258,7 @@ function addActionForHTMLUI(){
     });
 
     document.getElementById('angleSlider').addEventListener('mousemove', function() { 
-        g_globalAngle = this.value; 
+        g_globalAngleX = this.value; 
         renderAllShapes(); 
     });
 
@@ -254,7 +290,7 @@ function updateAnimationAngles(){
 function renderAllShapes(){
     var startTime = performance.now();
 
-    var globalRotMat = new Matrix4().rotate(g_globalAngle, 0, 1, 0);
+    var globalRotMat = new Matrix4().rotate(g_globalAngleX, g_globalAngleY, 1, 0);
     gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotMat.elements);
 
     // Clear <canvas>
@@ -282,74 +318,111 @@ function renderAllShapes(){
     // yellow.render();
 
 
-    // var magenta = new Cube();
+    // var magenta = new Pyramid();
     // magenta.color = [1.0, 0.0, 1.0, 1.0];
-    // magenta.matrix = yellowCoordinatesMatrix;
-    // magenta.matrix.translate(0, 0.65, 0.0, 0);
-    // magenta.matrix.rotate(g_MagentaAngle, 0, 0, 1);
+    // // magenta.matrix = yellowCoordinatesMatrix;
+    // // magenta.matrix.translate(0, 0.65, 0.0, 0);
+    // // magenta.matrix.rotate(g_MagentaAngle, 0, 0, 1);
     // magenta.matrix.scale(0.3, 0.3, 0.3);
-    // magenta.matrix.translate(-0.5, 0, -0.001, 0);
+    // // magenta.matrix.translate(-0.5, 0, -0.001, 0);
     // magenta.render();
-
-    
-    // Dog's Eyes
-    var leftEye = new Cube();
-    leftEye.color = [0.1, 0.1, 0.1, 5.0];
-    leftEye.matrix.translate(-0.1575, 0.25, -0.8);
-    leftEye.matrix.rotate(0, 1, 0, 0);
-    leftEye.matrix.scale(0.1, 0.1, 0.1);
-    leftEye.render();
-
-    var rightEye = new Cube();
-    rightEye.color = [0.1, 0.1, 0.1, 5.0];
-    rightEye.matrix.translate(0.0625, 0.25, -0.8);
-    rightEye.matrix.rotate(0, 1, 0, 0);
-    rightEye.matrix.scale(0.1, 0.1, 0.1);
-    rightEye.render();
-
-    // Dog's Ears
-    var dogLeftEar = new Cube();
-    dogLeftEar.color = [0.4, 0.7, 0.4, 1.0];
-    dogLeftEar.matrix.translate(-0.25, 0.5, -0.6);
-    dogLeftEar.matrix.rotate(0, 1, 0, 0);
-    dogLeftEar.matrix.scale(0.1, 0.1, 0.15);
-    dogLeftEar.render();
-
-    var dogRightEar = new Cube();
-    dogRightEar.color = [0.4, 0.7, 0.4, 1.0];
-    dogRightEar.matrix.translate(0.15, 0.5, -0.6);
-    dogRightEar.matrix.rotate(0, 1, 0, 0);
-    dogRightEar.matrix.scale(0.1, 0.1, 0.15);
-    dogRightEar.render();
-
-    // Dog's Mouth
-    var dogMouth = new Cube();
-    dogMouth.color = [0.8, 0.7, 0.5, 1.0];
-    dogMouth.matrix.translate(-0.25, 0, -0.9);
-    dogMouth.matrix.rotate(0, 1, 0, 0);
-    dogMouth.matrix.scale(0.5, 0.275, 0.15);
-    dogMouth.render();
-
-    var dogMouthStripe = new Cube();
-    dogMouthStripe.color = [1.0, 1.0, 1.0, 1.0];
-    dogMouthStripe.matrix.translate(-0.1, 0, -0.925);
-    dogMouthStripe.matrix.rotate(0, 1, 0, 0);
-    dogMouthStripe.matrix.scale(0.2, 0.275, 0.15);
-    dogMouthStripe.render();
 
     // Dog's Head
     var dogHead = new Cube();
     dogHead.color = [0.8, 0.7, 0.5, 1.0];
     dogHead.matrix.translate(-0.25, 0, -0.75);
-    dogHead.matrix.rotate(0, 1, 0, 0);
+    dogHead.matrix.rotate(g_yellowAngle, 0, 0, 1);
+    var dogHeadCoordsMatrix1 = new Matrix4(dogHead.matrix);
+    var dogHeadCoordsMatrix2 = new Matrix4(dogHead.matrix);
     dogHead.matrix.scale(0.5, 0.5, 0.45);
     dogHead.render();
 
+
+    // Dog's Mouth
+    var dogMouth = new Cube();
+    dogMouth.color = [0.35, 0.2, 0.1, 1.0];
+    dogMouth.matrix = dogHeadCoordsMatrix1;
+    dogMouth.matrix.translate(0.05, 0, -0.15);
+    // dogMouth.matrix.rotate(0, 1, 0, 0);
+    dogMouth.matrix.scale(0.4, 0.3, 0.15);
+    dogMouth.render();
+
+    // Dog's Nose
+    var dogNose = new Cube();
+    dogNose.color = [0.3, 0.15, 0.05, 1.0];
+    dogNose.matrix = dogHeadCoordsMatrix1;
+    dogNose.matrix.translate(0.35, 0.7, -0.15);
+    dogNose.matrix.scale(0.3, 0.3, 0.15);
+    dogNose.render();
+
+    // Dog's Eyes
+    var leftEye = new Cube();
+    leftEye.color = [0.1, 0.1, 0.1, 1.0];
+    leftEye.matrix = dogHeadCoordsMatrix2;
+    leftEye.matrix.translate(0.05, 0.3, -0.1);
+    leftEye.matrix.scale(0.1, 0.1, 0.1);
+    leftEye.render();
+
+    var rightEye = new Cube();
+    rightEye.color = [0.1, 0.1, 0.1, 1.0];
+    rightEye.matrix = dogHeadCoordsMatrix2;
+    rightEye.matrix.translate(3, 0, -0.1);
+    // rightEye.matrix.scale(0.1, 0.1, 0.1);
+    rightEye.render();
+
+   // Dog's Ears
+   var dogLeftEar = new Cube();
+   dogLeftEar.matrix = dogHeadCoordsMatrix2;
+   var dogLeftEarCoordsMatrix1 = new Matrix4(dogLeftEar.matrix);
+   dogLeftEar.color = [0.8, 0.7, 0.5, 1.0];
+   dogLeftEar.matrix.translate(0.525, 1.9, 2.5);
+   dogLeftEar.matrix.scale(1.5, 1.5, 1.5);
+   dogLeftEar.render();
+
+   let leftEar = new Pyramid();
+   leftEar.color = [0.35, 0.2, 0.1, 1.0];
+   leftEar.matrix = dogLeftEarCoordsMatrix1;
+   leftEar.matrix.rotate(180, 0, 0, 1);
+   leftEar.matrix.translate(2.65, -3.425, 1.5);
+   leftEar.matrix.scale(1.5, 1.5, 1.5);
+   leftEar.render();
+
+   var dogRightEar = new Cube();
+   dogRightEar.matrix = dogHeadCoordsMatrix2;
+   var dogRightEarCoordsMatrix = new Matrix4(dogRightEar.matrix);
+   dogRightEar.color = [0.8, 0.7, 0.5, 1.0];
+   dogRightEar.matrix.translate(-3.125, 0, 0);
+   dogRightEar.render();
+
+   let rightEar = new Pyramid();
+   rightEar.color = [0.35, 0.2, 0.1, 1.0];
+   rightEar.matrix = dogRightEarCoordsMatrix;
+   rightEar.matrix.rotate(180, 0, 0, 1);
+   rightEar.matrix.translate(-1.0, -1.025, -0.625);
+//    rightEar.matrix.scale(1.5, 1.5, 1.5); // Make it smaller
+   rightEar.render();
+
+//    var dogRightEar = new Cube();
+//    dogRightEar.color = [0.4, 0.7, 0.4, 1.0];
+//    dogRightEar.matrix = dogHeadCoordsMatrix2
+//    dogRightEar.matrix.translate(0.15, 0.5, -0.6);
+//    dogRightEar.matrix.rotate(0, 1, 0, 0);
+//    dogRightEar.matrix.scale(0.1, 0.1, 0.15);
+//    dogRightEar.render();
+
+
+    // var rightEye = new Cube();
+    // rightEye.color = [0.1, 0.1, 0.1, 1.0];
+    // rightEye.matrix = dogHeadCoordsMatrix1;
+    // rightEye.matrix.translate(0.0625, 0.25, -0.8);
+    // rightEye.matrix.rotate(0, 1, 0, 0);
+    // rightEye.matrix.scale(0.1, 0.1, 0.1);
+    // rightEye.render();
+    
     // Dog's Body
     var torsoFront = new Cube();
     torsoFront.color = [0.8, 0.7, 0.5, 1.0];
     torsoFront.matrix.translate(-0.25, -0.4, -0.5);
-    torsoFront.matrix.rotate(0, 1, 0, 0);
     var torsoFrontMatrix1 = new Matrix4(torsoFront.matrix);
     var torsoFrontMatrix2 = new Matrix4(torsoFront.matrix);
     torsoFront.matrix.scale(0.5, 0.4, 0.5);
@@ -358,17 +431,36 @@ function renderAllShapes(){
     var torsoMiddle = new Cube();
     torsoMiddle.color = [0.8, 0.7, 0.5, 1.0];
     torsoMiddle.matrix = torsoFrontMatrix1;
-    torsoMiddle.matrix.translate(0, 0.025, 0.5);
-    torsoMiddle.matrix.rotate(0, 1, 0, 0);
+    torsoMiddle.matrix.translate(0.025, 0.025, 0.5);
+    // torsoMiddle.matrix.rotate(0, 1, 0, 0);
     torsoMiddle.matrix.scale(0.45, 0.35, 0.2);
     torsoMiddle.render();
 
     var torsoRear = new Cube();
     torsoRear.color =  [0.8, 0.7, 0.5, 1.0];
     torsoRear.matrix = torsoFrontMatrix2;
+    var torsoRearMatrix = new Matrix4(torsoRear.matrix);
     torsoRear.matrix.translate(0, 0, 0.7);
     torsoRear.matrix.scale(0.5, 0.4, 0.3);
     torsoRear.render();
+
+    var dogTailBase = new Cube();
+    dogTailBase.color = [0.8, 0.7, 0.5, 1.0];
+    dogTailBase.matrix = torsoFrontMatrix2;
+    var dogTailMatrix = new Matrix4(torsoFrontMatrix2);
+    dogTailBase.matrix.translate(0.4, 0.8, 0.85);
+    dogTailBase.matrix.rotate(-25, 1, 0, 0);
+    dogTailBase.matrix.scale(0.2, 0.2, 0.6);
+    dogTailBase.render();
+    
+    var dogTailEnd = new Pyramid();
+    dogTailEnd.color = [0.8, 0.7, 0.5, 1.0];
+    dogTailEnd.matrix = new Matrix4(dogTailMatrix);
+    dogTailEnd.matrix.translate(0.4, 1.05, 1.15);
+    dogTailEnd.matrix.rotate(0, 45, 1, 0);
+    dogTailEnd.matrix.scale(0.205125, 0.3, 0.25);
+    dogTailEnd.render();
+    
 
     // Dog's Legs
     var backLeftLeg = new Cube();
@@ -419,26 +511,6 @@ function renderAllShapes(){
     frontRightFoot.matrix.translate(0.1, -0.675, -0.4);
     frontRightFoot.matrix.scale(0.125, 0.1, 0.175);
     frontRightFoot.render();
-
-    // var yellow = new Cube();
-    // yellow.color = [1.0, 1.0, 0.0, 1.0];
-    // yellow.matrix.setTranslate(0, -0.5, 0.0);
-    // yellow.matrix.rotate(-5, 1, 0, 0);
-    // yellow.matrix.rotate(g_yellowAngle, 0, 0, 1);
-    // var yellowCoordinatesMatrix = new Matrix4(yellow.matrix);
-    // yellow.matrix.scale(0.25, 0.7, 0.5);
-    // yellow.matrix.translate(-0.5, 0, 0.0);
-    // yellow.render();
-
-
-    // var magenta = new Cube();
-    // magenta.color = [1.0, 0.0, 1.0, 1.0];
-    // magenta.matrix = yellowCoordinatesMatrix;
-    // magenta.matrix.translate(0, 0.65, 0.0, 0);
-    // magenta.matrix.rotate(g_MagentaAngle, 0, 0, 1);
-    // magenta.matrix.scale(0.3, 0.3, 0.3);
-    // magenta.matrix.translate(-0.5, 0, -0.001, 0);
-    // magenta.render();
 
     var duration = performance.now() - startTime;
     sendTextToHTML(" ms: " + Math.floor(duration) + " fps: " + Math.floor(10000/duration) / 10, "numdot");
