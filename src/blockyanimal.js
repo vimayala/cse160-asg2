@@ -467,9 +467,9 @@ function renderAllShapes(){
     var torsoMiddle = new Cube();
     torsoMiddle.color = [0.8, 0.7, 0.5, 1.0];
     torsoMiddle.matrix = torsoFrontMatrix1;
-    torsoMiddle.matrix.translate(0.025, 0.025, 0.5);
+    torsoMiddle.matrix.translate(0.025, 0.025, 0.425);
     // torsoMiddle.matrix.rotate(0, 1, 0, 0);
-    torsoMiddle.matrix.scale(0.45, 0.35, 0.2);
+    torsoMiddle.matrix.scale(0.45, 0.35, 0.275);
     torsoMiddle.render();
 
     var torsoRear = new Cube();
@@ -485,6 +485,7 @@ function renderAllShapes(){
     var dogTailBase = new Cube();
     dogTailBase.color = [0.8, 0.7, 0.5, 1.0];
     dogTailBase.matrix = torsoFrontMatrix2;
+    dogTailBase.matrix.rotate(g_BodyAngle / 4, 0, 1, 0);
     var dogTailMatrix = new Matrix4(torsoFrontMatrix2);
     dogTailBase.matrix.translate(0.4, 0.8, 0.85);
     dogTailBase.matrix.rotate(-25, 1, 0, 0);
@@ -494,12 +495,11 @@ function renderAllShapes(){
     var dogTailEnd = new Pyramid();
     dogTailEnd.color = [0.8, 0.7, 0.5, 1.0];
     dogTailEnd.matrix = new Matrix4(dogTailMatrix);
-    dogTailEnd.matrix.translate(0.4, 1.05, 1.15);
-    // dogTailEnd.matrix.rotate(0, 45, 1, 0);
-    dogTailEnd.matrix.scale(0.205125, 0.3, 0.25);
+    dogTailEnd.matrix.translate(0.4, 1.2, 1.25);
+    dogTailEnd.matrix.rotate(50, 1, 0, 0);
+    dogTailEnd.matrix.scale(0.20, 0.3, 0.2);
     dogTailEnd.render();
     
-
     // Dog's Legs
     var backLeftLeg = new Cube();
     backLeftLeg.color =  [0.8, 0.7, 0.5, 1.0];
