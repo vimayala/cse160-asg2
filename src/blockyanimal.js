@@ -50,6 +50,7 @@ let g_globalAngleZ = 0;
 let g_yellowAngle = 0;
 let g_MagentaAngle = 0;
 let g_walkingAngle = 0;
+let g_LegAngle = 0;
 let g_BodyAngle = 0;
 
 
@@ -62,18 +63,13 @@ function main() {
     connectVariablesToGLSL();
     addActionForHTMLUI();
 
-    // Register function (event handler) to be called on a mouse press and allows clicking and dragging on the canvas
-    // canvas.onmousedown = handleClicks;
-    // canvas.onmousemove = function(ev) { if(ev.buttons === 1){ handleClicks(ev); } };
-
     canvas.addEventListener("mousedown", () => g_isDragging = true);
     canvas.addEventListener("mouseup", () => g_isDragging = false);
     canvas.addEventListener("mouseleave", () => g_isDragging = false);
     canvas.addEventListener("mousemove", handleMouseMove);
 
     clearCanvas();
-    // updateColorPreview();
-    renderAllShapes()
+    renderScene()
     requestAnimationFrame(tick);
 }
 var g_startTime = performance.now() / 1000.0 ;
@@ -108,47 +104,18 @@ function handleMouseMove(event) {
     g_lastX = event.clientX;
     g_lastY = event.clientY;
 
-    renderAllShapes();
+    renderScene();
 }
 
 function tick(){
     g_seconds = performance.now() / 1000.0 - g_startTime;
     updateAnimationAngles();
-    renderAllShapes();   
+    renderScene();   
     requestAnimationFrame(tick);
 
 }
 
-// function handleClicks(ev) {
-//     // Get x,y coords and return it to WebGL coordinates
-//     [x,y ,x,y, x,y] = convertCoordinatesToGL(ev);
-
-//     // Create and store new point with position, color, and size set
-//     let point;
-
-//     // Create new shape through button feedback
-//     if(g_selectedType == POINT){
-//         point = new Point;
-//     }
-//     else if (g_selectedType == TRIANGLE){
-//         point = new Triangle;
-//     }
-//     else{
-//         point = new Circle;
-//     }
-
-//     point.position = [x, y];
-//     point.color = [g_selectedColor[0], g_selectedColor[1], g_selectedColor[2], g_selectedColor[3]];
-//     point.size = g_selectedSize;
-//     point.segments = g_selectedSegments;
-//     g_shapesList.push(point);
-
-//     // Draw all the set of shapes needed for the canvas
-//     renderAllShapes();
-// }
-
 function clearCanvas(){
-    // Specify the color for clearing <canvas> 
     gl.clearColor(g_clearColorR, g_clearColorG, g_clearColorB, 1.0);
 
     // Clear <canvas>
@@ -212,7 +179,7 @@ function addActionForHTMLUI(){
     // Canvas Color + Clear Button Events
     document.getElementById('clear').onclick = function () { 
         g_shapesList = []; 
-        renderAllShapes(); 
+        renderScene(); 
     };
     document.getElementById('whiteCanvas').onclick = function () { 
         g_clearColorR = 1.0;
@@ -220,7 +187,7 @@ function addActionForHTMLUI(){
         g_clearColorB = 1.0;
         gl.clearColor(g_clearColorR, g_clearColorG, g_clearColorB, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT);
-        renderAllShapes(); 
+        renderScene(); 
 
     };
     document.getElementById('creamCanvas').onclick = function () { 
@@ -229,7 +196,7 @@ function addActionForHTMLUI(){
         g_clearColorB = 0.89;
         gl.clearColor(g_clearColorR, g_clearColorG, g_clearColorB, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT);
-        renderAllShapes(); 
+        renderScene(); 
 
     };
     document.getElementById('blackCanvas').onclick = function () { 
@@ -238,7 +205,7 @@ function addActionForHTMLUI(){
         g_clearColorB = 0.0;
         gl.clearColor(g_clearColorR, g_clearColorG, g_clearColorB, 1.0);
         gl.clear(gl.COLOR_BUFFER_BIT);
-        renderAllShapes(); 
+        renderScene(); 
     };
 
     // // Shape Button Events
@@ -258,28 +225,28 @@ function addActionForHTMLUI(){
 
     document.getElementById('magentaSlider').addEventListener('mousemove', function() { 
         g_MagentaAngle = -this.value; 
-        renderAllShapes(); 
+        renderScene(); 
     });
 
 
-    document.getElementById('dogHeadSlider').addEventListener('mousemove', function() { 
-        g_yellowAngle = -this.value; 
-        renderAllShapes(); 
+    document.getElementById('dogLegSlider').addEventListener('mousemove', function() { 
+        g_LegAngle = -this.value; 
+        renderScene(); 
     });
 
     document.getElementById('angleXSlider').addEventListener('mousemove', function() { 
         g_globalAngleX = this.value; 
-        renderAllShapes(); 
+        renderScene(); 
     });
 
     document.getElementById('angleYSlider').addEventListener('mousemove', function() { 
         g_globalAngleY = this.value; 
-        renderAllShapes(); 
+        renderScene(); 
     });
 
     document.getElementById('angleZSlider').addEventListener('mousemove', function() { 
         g_globalAngleZ = this.value; 
-        renderAllShapes(); 
+        renderScene(); 
     });
 
 }
@@ -309,10 +276,14 @@ function updateAnimationAngles(){
     if(g_walkingAnimation){
         g_walkingAngle = 7 * Math.sin((3 * g_seconds));
         g_BodyAngle = 45 * Math.sin(2.5*g_seconds);
+        g_LegAngle = 7 * Math.sin((3 * g_seconds));
     }
+
+    // if(g_legAnimation){
+    // }
 }
 
-function renderAllShapes(){
+function renderScene(){
     var startTime = performance.now();
 
     // var globalRotMat = new Matrix4().rotate(g_globalAngleX, g_globalAngleY, 1, 0);
@@ -504,7 +475,7 @@ function renderAllShapes(){
     var backLeftLeg = new Cube();
     backLeftLeg.color =  [0.8, 0.7, 0.5, 1.0];
     backLeftLeg.matrix = new Matrix4(torsoFrontMatrix3);
-    backLeftLeg.matrix.rotate(g_walkingAngle / 2, 1, 0, 0);
+    backLeftLeg.matrix.rotate(g_LegAngle / 2, 1, 0, 0);
     var backLeftLegMatrix = new Matrix4(backLeftLeg.matrix);
     // backLeftLeg.matrix.translate(-0.2, -0.575, 0.3);
     backLeftLeg.matrix.translate(0.05, -0.25, 0.775);
@@ -514,7 +485,7 @@ function renderAllShapes(){
     var backRightLeg = new Cube();
     backRightLeg.color =  [0.8, 0.7, 0.5, 1.0];
     backRightLeg.matrix = new Matrix4(torsoFrontMatrix3);
-    backRightLeg.matrix.rotate(-g_walkingAngle / 2, 1, 0, 0);
+    backRightLeg.matrix.rotate(-g_LegAngle / 2, 1, 0, 0);
     var backRightLegMatrix = new Matrix4(backRightLeg.matrix);
     backRightLeg.matrix.translate(0.36125, -0.25, 0.775);
     backRightLeg.matrix.scale(0.1, 0.35, 0.125);
@@ -523,7 +494,7 @@ function renderAllShapes(){
     var frontLeftLeg = new Cube();
     frontLeftLeg.color =  [0.8, 0.7, 0.5, 1.0];
     frontLeftLeg.matrix = new Matrix4(torsoFrontMatrix3);
-    frontLeftLeg.matrix.rotate(-g_walkingAngle / 1.5, 1, 0, 0);
+    frontLeftLeg.matrix.rotate(-g_LegAngle / 1.5, 1, 0, 0);
     var frontLeftLegMatrix = new Matrix4(frontLeftLeg.matrix);
     frontLeftLeg.matrix.translate(0.05, -0.25, 0.15);
     frontLeftLeg.matrix.scale(0.1, 0.35, 0.125);
@@ -532,7 +503,7 @@ function renderAllShapes(){
     var frontRightLeg = new Cube();
     frontRightLeg.color =  [0.8, 0.7, 0.5, 1.0];
     frontRightLeg.matrix = new Matrix4(torsoFrontMatrix3);
-    frontRightLeg.matrix.rotate(g_walkingAngle / 1.5, 1, 0, 0);
+    frontRightLeg.matrix.rotate(g_LegAngle / 1.5, 1, 0, 0);
     var frontRightLegMatrix = new Matrix4(frontRightLeg.matrix);
     frontRightLeg.matrix.translate(0.36125, -0.25, 0.15);
     frontRightLeg.matrix.scale(0.1, 0.35, 0.125);
@@ -577,7 +548,7 @@ function renderAllShapes(){
     sendTextToHTML(" ms: " + Math.floor(duration) + " fps: " + Math.floor(10000/duration) / 10, "numdot");
 }
 
-// Send text to HTML, used for duration of renderAllShapes in this files 
+// Send text to HTML, used for duration of renderScene in this files 
 function sendTextToHTML(text, htmlID){
     var htmlElm = document.getElementById(htmlID);
     if(!htmlElm){
