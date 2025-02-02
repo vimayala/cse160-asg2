@@ -481,33 +481,33 @@ function renderAllShapes(){
     frontLeftLeg.matrix.scale(0.1, 0.175, 0.125);
     frontLeftLeg.render();
 
-    var frontLeftLeg = new Cube();
-    frontLeftLeg.color =  [0.8, 0.7, 0.5, 1.0];
-    frontLeftLeg.matrix.translate(0.1075, -0.575, -0.35);
-    frontLeftLeg.matrix.scale(0.1, 0.175, 0.125);
-    frontLeftLeg.render();
+    var frontRightLeg = new Cube();
+    frontRightLeg.color =  [0.8, 0.7, 0.5, 1.0];
+    frontRightLeg.matrix.translate(0.1075, -0.575, -0.35);
+    frontRightLeg.matrix.scale(0.1, 0.175, 0.125);
+    frontRightLeg.render();
 
     // Dog's Feet
     var backLeftFoot = new Cube();
-    backLeftFoot.color =  [0.8, 0.7, 0.5, 1.0];
+    backLeftFoot.color = [0.575, 0.45, 0.3, 1.0];
     backLeftFoot.matrix.translate(-0.21525, -0.675, 0.25);
     backLeftFoot.matrix.scale(0.125, 0.1, 0.175);
     backLeftFoot.render();
 
     var backRightFoot = new Cube();
-    backRightFoot.color = [0.8, 0.7, 0.5, 1.0];
+    backRightFoot.color = [0.575, 0.45, 0.3, 1.0];
     backRightFoot.matrix.translate(0.1, -0.675, 0.25);
     backRightFoot.matrix.scale(0.125, 0.1, 0.175);
     backRightFoot.render();
 
     var frontLeftFoot = new Cube();
-    frontLeftFoot.color = [0.8, 0.7, 0.5, 1.0];
+    frontLeftFoot.color = [0.575, 0.45, 0.3, 1.0];
     frontLeftFoot.matrix.translate(-0.21525, -0.675, -0.4);
     frontLeftFoot.matrix.scale(0.125, 0.1, 0.175);
     frontLeftFoot.render();
 
     var frontRightFoot = new Cube();
-    frontRightFoot.color = [0.8, 0.7, 0.5, 1.0];
+    frontRightFoot.color = [0.575, 0.45, 0.3, 1.0];
     frontRightFoot.matrix.translate(0.1, -0.675, -0.4);
     frontRightFoot.matrix.scale(0.125, 0.1, 0.175);
     frontRightFoot.render();
