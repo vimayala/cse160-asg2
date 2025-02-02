@@ -30,7 +30,7 @@ Note to Graders:
     <button type="button" id="creamCanvas"> cream</button>
     <button type="button" id="blackCanvas">black</button>
 
-    <h2>
+    <!-- <h2>
       Shape Selections:
     </h2>
     <button type="button" id="pointButton">square
@@ -38,7 +38,7 @@ Note to Graders:
     <button type="button" id="triButton">triangle
     </button>
     <button type="button" id="circleButton">circle
-    </button>
+    </button> -->
 
     <p id = "numdot">XXX</p>
 
@@ -65,8 +65,8 @@ Note to Graders:
           <button type="button" id="animateMagentaButtonOFF">OFF
         </div>
         <div class="slider-row">
-          <label for="yellowSlider">Yellow</label>
-          <input type="range" min="-45" max="45" value="0" class="slider" id="yellowSlider">
+          <label for="dogHeadSlider">Dog's Head</label>
+          <input type="range" min="-45" max="45" value="0" class="slider" id="dogHeadSlider">
           Animation:
           <button type="button" id="animateYellowButtonON">ON
           <button type="button" id="animateYellowButtonOFF">OFF
@@ -74,9 +74,20 @@ Note to Graders:
 
         </div>
         <div class="slider-row">
-          <label for="angleSlider">Camera Angle</label>
-          <input type="range" min="0" max="90" value="5" class="slider" id="angleSlider">
+          <label for="angleXSlider">Camera Angle X</label>
+          <input type="range" min="0" max="90" value="0" class="slider" id="angleXSlider">
         </div>
+
+        <div class="slider-row">
+          <label for="angleYSlider">Camera Angle Y</label>
+          <input type="range" min="0" max="90" value="15" class="slider" id="angleYSlider">
+        </div>
+
+        <div class="slider-row">
+          <label for="angleZSlider">Camera Angle Z</label>
+          <input type="range" min="0" max="90" value="0" class="slider" id="angleZSlider">
+        </div>
+
       </div>
       <div id="colorPreview"></div>
     </div>

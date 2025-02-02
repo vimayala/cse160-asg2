@@ -42,8 +42,8 @@ let g_selectedSize = 5;
 let g_selectedType = POINT;
 let g_selectedSegments = 12;
 
-let g_globalAngleX = 30;
-let g_globalAngleY = 0;
+let g_globalAngleX = 0;
+let g_globalAngleY = 15;
 let g_globalAngleZ = 0;
 
 
@@ -252,13 +252,23 @@ function addActionForHTMLUI(){
     });
 
 
-    document.getElementById('yellowSlider').addEventListener('mousemove', function() { 
+    document.getElementById('dogHeadSlider').addEventListener('mousemove', function() { 
         g_yellowAngle = -this.value; 
         renderAllShapes(); 
     });
 
-    document.getElementById('angleSlider').addEventListener('mousemove', function() { 
+    document.getElementById('angleXSlider').addEventListener('mousemove', function() { 
         g_globalAngleX = this.value; 
+        renderAllShapes(); 
+    });
+
+    document.getElementById('angleYSlider').addEventListener('mousemove', function() { 
+        g_globalAngleY = this.value; 
+        renderAllShapes(); 
+    });
+
+    document.getElementById('angleZSlider').addEventListener('mousemove', function() { 
+        g_globalAngleZ = this.value; 
         renderAllShapes(); 
     });
 
@@ -290,7 +300,13 @@ function updateAnimationAngles(){
 function renderAllShapes(){
     var startTime = performance.now();
 
-    var globalRotMat = new Matrix4().rotate(g_globalAngleX, g_globalAngleY, 1, 0);
+    // var globalRotMat = new Matrix4().rotate(g_globalAngleX, g_globalAngleY, 1, 0);
+    let globalRotMat = new Matrix4()
+    .rotate(g_globalAngleX, 1, 0, 0)  // X-axis
+    .rotate(g_globalAngleY, 0, 1, 0)  // Y-axis
+    .rotate(g_globalAngleZ, 0, 0, 1); // Z-axis
+
+
     gl.uniformMatrix4fv(u_GlobalRotateMatrix, false, globalRotMat.elements);
 
     // Clear <canvas>
