@@ -361,9 +361,9 @@ function renderAllShapes(){
     // Dog's Head
     var dogHead = new Cube();
     dogHead.color = [0.8, 0.7, 0.5, 1.0];
-    dogHead.matrix.translate(-0.25, 0, -0.75);
+    dogHead.matrix.translate(-0.25, -0.05, -0.75);
     dogHead.matrix.rotate(g_BodyAngle * 0.075, 0, 1, 0);
-    dogHead.matrix.rotate(g_BodyAngle * 0.1, 1, 0, 0);
+    dogHead.matrix.rotate(g_BodyAngle * 0.125, 1, 0, 0);
     var dogHeadCoordsMatrix1 = new Matrix4(dogHead.matrix);
     var dogHeadCoordsMatrix2 = new Matrix4(dogHead.matrix);
     // dogHead.matrix.rotate(180, 0, 1, 0)
@@ -542,40 +542,32 @@ function renderAllShapes(){
     var backLeftFoot = new Cube();
     backLeftFoot.color = [0.575, 0.45, 0.3, 1.0];
     backLeftFoot.matrix = backLeftLegMatrix;
-    backLeftFoot.matrix.translate(0.035, -0.275, 0.75);
-    backLeftFoot.matrix.scale(0.125, 0.1, 0.15);
+    backLeftFoot.matrix.translate(0.035, -0.275, 0.7375);
+    backLeftFoot.matrix.rotate(g_MagentaAngle / 8, 1, 0, 0);
+    backLeftFoot.matrix.scale(0.125, 0.1, 0.175);
     backLeftFoot.render();
 
     var backRightFoot = new Cube();
     backRightFoot.color = [0.575, 0.45, 0.3, 1.0];
     backRightFoot.matrix = backRightLegMatrix;
-    backRightFoot.matrix.translate(0.35, -0.275, 0.75);
-    backRightFoot.matrix.scale(0.125, 0.1, 0.15);
+    backRightFoot.matrix.translate(0.35, -0.275, 0.7375);
+    backRightFoot.matrix.rotate(g_MagentaAngle / 10, 1, 0, 0);
+    backRightFoot.matrix.scale(0.125, 0.1, 0.175);
     backRightFoot.render();
-
-    // var frontLeftFoot = new Cube();
-    // frontLeftFoot.color = [0.575, 0.45, 0.3, 1.0];
-    // frontLeftFoot.matrix = frontLeftLegMatrix;
-    // frontLeftFoot.matrix.rotate(180, 1, 0, 0);  // Rotate based on g_MagentaAngle
-
-    // frontLeftFoot.matrix.rotate(g_MagentaAngle / 10, 1, 0, 0);
-    // frontLeftFoot.matrix.translate(0.025, 0.175, -0.275);
-    // frontLeftFoot.matrix.scale(0.125, 0.1, 0.175);
-    // frontLeftFoot.render();
 
     var frontLeftFoot = new Cube();
     frontLeftFoot.color = [0.575, 0.45, 0.3, 1.0];
     frontLeftFoot.matrix = frontLeftLegMatrix;
-    frontLeftFoot.matrix.translate(0.035, -0.175, 0.275);
+    frontLeftFoot.matrix.translate(0.035, -0.175, 0.2875);
     frontLeftFoot.matrix.rotate(180, 1, 0, 0);
-    frontLeftFoot.matrix.rotate(g_MagentaAngle / 10, 1, 0, 0);
+    frontLeftFoot.matrix.rotate(g_MagentaAngle / 8, 1, 0, 0);
     frontLeftFoot.matrix.scale(0.125, 0.1, 0.175);
     frontLeftFoot.render();
 
     var frontRightFoot = new Cube();
     frontRightFoot.color = [0.575, 0.45, 0.3, 1.0];
     frontRightFoot.matrix = frontRightLegMatrix;
-    frontRightFoot.matrix.translate(0.35, -0.175, 0.275);
+    frontRightFoot.matrix.translate(0.35, -0.175, 0.2875);
     frontRightFoot.matrix.rotate(180, 1, 0, 0);
     frontRightFoot.matrix.rotate(g_MagentaAngle / 10, 1, 0, 0);
     frontRightFoot.matrix.scale(0.125, 0.1, 0.175);
