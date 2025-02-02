@@ -3,13 +3,15 @@ Victoria Ayala
 vimayala@ucsc.edu
 
 Note to Graders:
-
+  Credited ChatGPT where used (for mouse control of the camera). 
+  Known issue: if sliders are used then mouse, dog jumps out of frame unless sliders hovered over again.
+  Also aware of not very natural animation :P I just wanted to make a pug.
 -->
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- <link rel="stylesheet" href="BlockyAnimal.css"> -->
+    <link rel="stylesheet" href="BlockyAnimal.css">
     <meta charset="utf-8" />
     <title>CSE 160 Asg 2</title>
   </head>
@@ -30,34 +32,11 @@ Note to Graders:
     <button type="button" id="creamCanvas"> cream</button>
     <button type="button" id="blackCanvas">black</button>
 
-    <!-- <h2>
-      Shape Selections:
-    </h2>
-    <button type="button" id="pointButton">square
-    </button>
-    <button type="button" id="triButton">triangle
-    </button>
-    <button type="button" id="circleButton">circle
-    </button> -->
-
     <p id = "numdot">XXX</p>
 
     <div class="container">
       <div class="sliders">
         <h2>Animation Controls:</h2>
-        <!-- <div class="slider-row">
-          <label for="redSlider">Red</label>
-          <input type="range" min="0" max="100" value="100" class="slider" id="redSlider">
-        </div>
-        <div class="slider-row">
-          <label for="greenSlider">Green</label>
-          <input type="range" min="0" max="100" value="100" class="slider" id="greenSlider">
-        </div>
-        <div class="slider-row">
-          <label for="blueSlider">Blue</label>
-          <input type="range" min="0" max="100" value="100" class="slider" id="blueSlider">
-        </div> -->
-               
         <div class="slider-row">
           <label for="dogWalkingButton">Dog Walking</label>
           <!-- <input type="range" min="-45" max="45" value="0" class="slider" id="dogHeadSlider"> -->
@@ -67,19 +46,19 @@ Note to Graders:
         </div>  
 
         <div class="slider-row">
-          <label for="magentaSlider">Feet Joint Control</label>
-          <input type="range" min="-45" max="45" value="0" class="slider" id="magentaSlider">
+          <label for="feetSlider">Feet Joint Control</label>
+          <input type="range" min="-45" max="45" value="0" class="slider" id="feetSlider">
           Animation:
-          <button type="button" id="animateMagentaButtonON">ON
-          <button type="button" id="animateMagentaButtonOFF">OFF
+          <button type="button" id="animateFeetButtonON">ON
+          <button type="button" id="animateFeetButtonOFF">OFF
         </div>
 
         <div class="slider-row">
           <label for="dogLegSlider">Leg Joint Control</label>
           <input type="range" min="-10" max="10" value="0" class="slider" id="dogLegSlider">
           Animation:
-          <button type="button" id="animateYellowButtonON">ON
-          <button type="button" id="animateYellowButtonOFF">OFF
+          <button type="button" id="animateLegButtonON">ON
+          <button type="button" id="animateLegButtonOFF">OFF
         </div>
 
         <div class="slider-row">
@@ -98,29 +77,8 @@ Note to Graders:
         </div>
 
       </div>
-      <div id="colorPreview"></div>
     </div>
     
-
-    <!-- <h2>
-      Size and Circle Options:
-    </h2>
-    <div class="sliders">
-      <div class="slider-row">
-        <label for="sizeSlider">Size</label>
-        <input type="range" min="5" max="40" value="100" class="slider" id="sizeSlider">
-      </div>
-      <div class="slider-row">
-        <label for="segSlider">(Circles) Segment Count</label>
-        <input type="range" min="5" max="40" value="100" class="slider" id="segSlider">
-      </div> -->
-    <!-- </div> -->
-
-    <!-- <h2>
-      Let Them Eat Cake:
-    </h2>
-    <button type="button" id="cakeToggle">🍰</button> -->
-
     <script src="../lib/webgl-utils.js"></script>
     <script src="../lib/webgl-debug.js"></script>
     <script src="../lib/cuon-utils.js"></script>
